@@ -162,4 +162,12 @@ python download_profile.py nasa spacex --import-browser chrome
 
 Downloading another user's media may be subject to Instagram's Terms of Service
 and copyright law. Only download content you have the right to, and use this
-tool responsibly."# Instagram_profile_downloaer" 
+tool responsibly.
+
+---
+
+## Credits
+
+This project is built on top of [**instaloader**](https://instaloader.github.io/),
+an excellent library for Instagram profile downloads. Special thanks to the
+instaloader maintainers for their work on Instagram automation and scraping.
