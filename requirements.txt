@@ -1,0 +1,28 @@
+# Runtime dependencies for the Instagram downloader (CLI + web app)
+#
+# Install with:
+#     pip install -r requirements.txt
+#
+# The "Real browser" engine additionally needs the Chromium binary, installed
+# once with:
+#     python -m playwright install chromium
+
+# --- Core (used by the bundled instaloader package and the CLI script) ---
+
+# Core HTTP library used by the bundled instaloader package.
+requests>=2.25
+
+# Optional: import an existing Instagram login session straight from your
+# browser's cookies (helps avoid re-typing credentials and reduces the chance
+# of being flagged as a bot). Used by --import-browser.
+browser_cookie3>=0.19.1
+
+# --- Web app (webapp/app.py) ---
+
+# Lightweight web framework serving the browser-style UI and JSON API.
+Flask>=3.0
+
+# Real script-controlled browser engine (drives actual Chromium, desktop or
+# mobile emulation) for the lowest bot-detection footprint.
+# After installing, also run:  python -m playwright install chromium
+playwright>=1.40

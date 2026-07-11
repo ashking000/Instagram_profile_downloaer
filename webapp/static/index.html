@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram Downloader</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- Browser-style chrome -->
+  <header class="browser-bar">
+    <div class="window-dots">
+      <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+    </div>
+
+    <form id="address-form" class="address-bar" autocomplete="off">
+      <span class="addr-scheme">instagram.com/</span>
+      <input id="profile-input" type="text" placeholder="profile-username" spellcheck="false" />
+      <button type="submit" id="go-btn" class="go-btn">Download</button>
+    </form>
+
+    <div class="engine-area">
+      <select id="engine-select" title="Download engine">
+        <option value="instaloader">Engine: Instaloader</option>
+        <option value="browser">Engine: Real browser</option>
+      </select>
+      <label id="mobile-label" class="mobile-toggle hidden" title="Use a mobile browser user agent">
+        <input type="checkbox" id="mobile-check" /> Mobile
+      </label>
+    </div>
+
+    <div class="auth-area">
+      <span id="auth-status" class="auth-status">Not logged in</span>
+      <button id="login-btn" class="ghost-btn">Log in</button>
+      <button id="logout-btn" class="ghost-btn hidden">Log out</button>
+    </div>
+  </header>
+
+  <!-- Progress / status strip -->
+  <div id="progress-strip" class="progress-strip hidden">
+    <div class="progress-info">
+      <strong id="progress-title">Downloading…</strong>
+      <span id="progress-detail"></span>
+    </div>
+    <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+  </div>
+
+  <!-- Toolbar for gallery actions -->
+  <div id="toolbar" class="toolbar hidden">
+    <label class="select-all"><input type="checkbox" id="select-all" /> Select all</label>
+    <span id="selection-count" class="selection-count">0 selected</span>
+    <div class="spacer"></div>
+    <div class="filter">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="image">Images</button>
+      <button class="chip" data-filter="video">Videos</button>
+    </div>
+    <button id="download-selected" class="primary-btn" disabled>Download selected (ZIP)</button>
+    <button id="download-all" class="secondary-btn">Download all (ZIP)</button>
+  </div>
+
+  <!-- Gallery -->
+  <main id="gallery" class="gallery">
+    <div id="empty-state" class="empty-state">
+      <div class="empty-icon">⬇</div>
+      <h2>Download an Instagram profile</h2>
+      <p>Type a username in the address bar above and press <strong>Download</strong>.<br />
+         Log in first to grab private profiles you follow.</p>
+    </div>
+  </main>
+
+  <!-- Login modal -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-card">
+      <h3>Log in to Instagram</h3>
+      <p class="modal-note">Your credentials go straight to Instagram from this local
+        server and are used only to create a login session. They are not stored in plain text.</p>
+      <div id="login-step">
+        <input id="login-username" type="text" placeholder="Username" autocomplete="username" />
+        <input id="login-password" type="password" placeholder="Password" autocomplete="current-password" />
+        <button id="do-login" class="primary-btn full">Log in</button>
+
+        <div class="divider"><span>or</span></div>
+
+        <p class="modal-note" style="margin-bottom:8px">
+          <strong>Use your browser login</strong> (recommended, fewer 429 errors).
+          Reuses a session from a browser where you're already logged in to Instagram.
+        </p>
+        <div class="browser-row">
+          <select id="browser-select">
+            <option value="firefox">Firefox</option>
+            <option value="chrome">Chrome</option>
+            <option value="edge">Edge</option>
+            <option value="brave">Brave</option>
+            <option value="chromium">Chromium</option>
+            <option value="opera">Opera</option>
+            <option value="vivaldi">Vivaldi</option>
+          </select>
+          <button id="do-browser" class="secondary-btn">Import cookies</button>
+        </div>
+
+        <div class="divider"><span>or</span></div>
+
+        <p class="modal-note" style="margin-bottom:8px">
+          <strong>Log in with a real browser</strong> (best against 429 errors).
+          Opens an actual Chromium window; log in there (2FA works), and the
+          session is reused for the "Real browser" download engine.
+        </p>
+        <button id="do-real-browser" class="primary-btn full">Open browser to log in</button>
+        <p id="real-browser-status" class="modal-note" style="margin-top:8px"></p>
+      </div>
+      <div id="twofa-step" class="hidden">
+        <p>Enter the 6-digit code from your authenticator app or SMS.</p>
+        <input id="twofa-code" type="text" placeholder="2FA code" inputmode="numeric" />
+        <button id="do-2fa" class="primary-btn full">Verify</button>
+      </div>
+      <p id="login-error" class="error hidden"></p>
+      <button id="close-modal" class="ghost-btn full">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Lightbox preview -->
+  <div id="lightbox" class="lightbox hidden">
+    <button id="lightbox-close" class="lightbox-close">×</button>
+    <div id="lightbox-content" class="lightbox-content"></div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

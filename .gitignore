@@ -1,0 +1,23 @@
+# Downloaded media (can be large; not source)
+webapp/downloads/
+downloads/
+
+# Cached Instagram login sessions (contain auth cookies - never commit)
+webapp/sessions/
+*.session
+session-*
+
+# Persistent real-browser (Playwright) profiles - contain login cookies
+webapp/browser_profiles/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+Thumbs.db
